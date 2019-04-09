@@ -1,0 +1,21 @@
+.navbar {
+  height: 100vh;
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.nav-header,
+.nav-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-header {
+  height: 50px;
+  color: var(--fail);
+}
+
+.nav-body {
+  flex-direction: column;
+}
