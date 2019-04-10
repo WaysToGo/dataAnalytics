@@ -1,9 +1,16 @@
 import "./SideNav.css";
 import React, { Component } from "react";
+import QueryModal from "../Modal/QueryModal";
 
 export default class RightNav extends Component {
   render() {
-    const { queryData, updateQuery } = this.props;
+    const {
+      queryData,
+      updateQuery,
+      state,
+      handleInputChange,
+      handleNewQuerySubmit
+    } = this.props;
     let dashboardItems = [];
     if (queryData) {
       dashboardItems = queryData.map(a => {
@@ -21,11 +28,14 @@ export default class RightNav extends Component {
 
     return (
       <nav className="nav-bar">
-        <div className="nav-header ">
-          {" "}
-          <i className="fas fa-cog" />
-          Query
+        <div className="nav-header">
+          <QueryModal
+            handleNewQuerySubmit={handleNewQuerySubmit}
+            state={state}
+            handleInputChange={handleInputChange}
+          />
         </div>
+
         <div className="nav-body">{dashboardItems}</div>
       </nav>
     );

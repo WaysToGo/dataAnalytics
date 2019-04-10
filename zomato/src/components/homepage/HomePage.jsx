@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import Loading from "../Common/Loading.jsx";
 import SideNav from "../Common/SideNav.jsx";
 import RightNav from "../Common/RightNav.jsx";
@@ -6,12 +6,7 @@ import RightNav from "../Common/RightNav.jsx";
 import "./HomePage.css";
 
 import axios from "axios";
-import Toggle from "../Common/Toogle.jsx";
 
-import NewDashboard from "../Inputfield/NewDashboard";
-import NewQuery from "../Inputfield/NewQuery";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 import Charts from "../Charts/Charts.js";
 
 export default class HomePage extends Component {
@@ -170,83 +165,26 @@ export default class HomePage extends Component {
           dashboards={dashboards}
           updateDashboard={this.updateDashboard}
           currentDashboard={currentDashboard}
+          handleDhashboardSubmit={this.handleDhashboardSubmit}
+          state={this.state}
+          handleInputChange={this.handleInputChange}
         />
         <main className="content-wrapper">
           <section>
-            <Toggle>
-              {({ on, toggle }) => (
-                <Fragment>
-                  <button onClick={toggle} className="btn btn-light">
-                    CREATE DASHBOARD
-                  </button>
-
-                  <Modal show={on} onHide={toggle}>
-                    <Modal.Header closeButton>
-                      <Modal.Title>Create New Dashboard</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                      <NewDashboard
-                        handleInputChange={this.handleInputChange}
-                        state={this.state}
-                      />
-                    </Modal.Body>
-                    <Modal.Footer>
-                      <Button
-                        variant="primary"
-                        onClick={event => {
-                          toggle();
-                          this.handleDhashboardSubmit();
-                        }}
-                      >
-                        Save Changes
-                      </Button>
-                    </Modal.Footer>
-                  </Modal>
-                </Fragment>
-              )}
-            </Toggle>
-
-            {currentDashboard.length > 0 && (
-              <Toggle>
-                {({ on, toggle }) => (
-                  <Fragment>
-                    <button onClick={toggle} className="btn btn-light ">
-                      NEW QUERY
-                    </button>
-                    <Modal show={on} onHide={toggle}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Create New Query</Modal.Title>
-                      </Modal.Header>
-                      <Modal.Body>
-                        <NewQuery
-                          handleInputChange={this.handleInputChange}
-                          state={this.state}
-                        />
-                      </Modal.Body>
-                      <Modal.Footer>
-                        <Button
-                          variant="primary"
-                          onClick={event => {
-                            toggle();
-                            this.handleNewQuerySubmit();
-                          }}
-                        >
-                          Save Changes
-                        </Button>
-                      </Modal.Footer>
-                    </Modal>
-                  </Fragment>
-                )}
-              </Toggle>
-            )}
             {showCharts && <Charts dashboardData={dashboardData} />}
           </section>
         </main>
-        <RightNav
-          queryData={queryData}
-          updateQuery={this.updateQuery}
-          currentQuery={currentQuery}
-        />
+        {currentDashboard.length > 0 && (
+          <RightNav
+            queryData={queryData}
+            updateQuery={this.updateQuery}
+            currentQuery={currentQuery}
+            handleNewQuerySubmit={this.handleNewQuerySubmit}
+            state={this.state}
+            handleInputChange={this.handleInputChange}
+            currentDashboard={this.currentDashboard}
+          />
+        )}
       </div>
     );
   }

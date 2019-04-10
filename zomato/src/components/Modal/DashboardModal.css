@@ -1,0 +1,7 @@
+.dashboard-modal {
+  color: var(--fail);
+}
+
+.dashboard-modal i {
+  padding: 5px;
+}
