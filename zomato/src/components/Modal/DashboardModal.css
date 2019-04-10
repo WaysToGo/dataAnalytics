@@ -1,6 +1,10 @@
 .dashboard-modal {
   color: var(--fail);
 }
+.dashboard-modal:hover {
+  color: var(--fail);
+  opacity: 0.8;
+}
 
 .dashboard-modal i {
   padding: 5px;

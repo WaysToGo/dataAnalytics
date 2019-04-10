@@ -9,20 +9,34 @@ export default class SideNav extends Component {
       updateDashboard,
       handleDhashboardSubmit,
       state,
-      handleInputChange
+      handleInputChange,
+      currentDashboard
     } = this.props;
     let dashboardItems = [];
+
     if (dashboards) {
       dashboardItems = dashboards.map(a => {
-        return (
-          <div
-            onClick={() => updateDashboard(a.name)}
-            key={a.description}
-            className="dashboard-items"
-          >
-            {a.name}
-          </div>
-        );
+        if (a.name == currentDashboard) {
+          return (
+            <div
+              onClick={() => updateDashboard(a.name)}
+              key={a.description}
+              className="dashboard-items selected"
+            >
+              {a.name}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              onClick={() => updateDashboard(a.name)}
+              key={a.description}
+              className="dashboard-items "
+            >
+              {a.name}
+            </div>
+          );
+        }
       });
     }
 

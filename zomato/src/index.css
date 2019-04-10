@@ -235,15 +235,21 @@ template {
 /* custom css starts from here  */
 
 :root {
-  --theme-primary-color: #fff;
+  --theme-primary-color: #0f273d;
   --text-color: #848e9e;
   --success: #3cd483;
   --fail: #d64d96;
+  --white: #fff;
   --button-primary: #0d6fff;
   --button-default: black;
   --button-danger: #d64d96;
   --button-info: #5bc0de;
   --border-color: #848e9e;
+  --selected: #dee2e6;
+  --content-bg: #0c2033;
+  --content-header: #f5f6fa;
+  --modal-header: #0c2033;
+  --modal-body: #0c2033;
 }
 body {
   background-color: var(--theme-primary-color);

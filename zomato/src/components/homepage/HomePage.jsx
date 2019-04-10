@@ -78,7 +78,8 @@ export default class HomePage extends Component {
       if (a.name === currentDashboard) {
         this.setState({
           queryData: a.queries,
-          currentDashboard
+          currentDashboard,
+          showCharts: false
         });
       }
     });

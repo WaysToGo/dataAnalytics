@@ -47,3 +47,11 @@
 .form-wrapper label {
   text-align: right;
 } */
+
+.content-wrapper {
+  background: var(--content-bg);
+}
+
+section {
+  width: 100%;
+}

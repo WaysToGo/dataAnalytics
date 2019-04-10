@@ -6,7 +6,7 @@ export default class NewDashboard extends Component {
     const { state, handleInputChange } = this.props;
     return (
       <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
@@ -17,7 +17,7 @@ export default class NewDashboard extends Component {
         </Form.Group>
 
         <Form.Group controlId="formQueryDescription">
-          <Form.Label>description</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control
             type="text"
             name="dashboardDescription"

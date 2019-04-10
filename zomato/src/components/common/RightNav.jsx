@@ -9,20 +9,33 @@ export default class RightNav extends Component {
       updateQuery,
       state,
       handleInputChange,
-      handleNewQuerySubmit
+      handleNewQuerySubmit,
+      currentQuery
     } = this.props;
     let dashboardItems = [];
     if (queryData) {
       dashboardItems = queryData.map(a => {
-        return (
-          <div
-            onClick={() => updateQuery(a.name, a.query)}
-            key={a.name}
-            className="dashboard-items "
-          >
-            {a.name}
-          </div>
-        );
+        if (a.name == currentQuery) {
+          return (
+            <div
+              onClick={() => updateQuery(a.name, a.query)}
+              key={a.name}
+              className="dashboard-items selected"
+            >
+              {a.name}
+            </div>
+          );
+        } else {
+          return (
+            <div
+              onClick={() => updateQuery(a.name, a.query)}
+              key={a.name}
+              className="dashboard-items "
+            >
+              {a.name}
+            </div>
+          );
+        }
       });
     }
 

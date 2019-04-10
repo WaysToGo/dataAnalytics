@@ -6,7 +6,7 @@ export default class NewQuery extends Component {
     const { state, handleInputChange } = this.props;
     return (
       <Form>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
@@ -25,7 +25,7 @@ export default class NewQuery extends Component {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="formBasicChecbox">
+        <Form.Group controlId="formQuery">
           <Form.Label>Query</Form.Label>
           <Form.Control
             type="text"

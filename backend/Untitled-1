@@ -1,0 +1,55 @@
+axios
+      .get(`http://localhost:5000/query?query=select * from city`)
+      .then(response => response.data)
+      .then(data => {
+        this.setState({
+          dashboardData: data,
+          loading: false
+        });
+      })
+      .catch(error =>
+        this.setState({ loading: false, error: "Sorry somthing went wrong" })
+      );
+
+
+
+
+       <Toggle>
+          {({ on, toggle }) => (
+            <Fragment>
+              <button onClick={toggle} className="btn btn-light">
+                New Graph
+              </button>
+
+              <Modal show={on} onHide={toggle}>
+                <Modal.Header closeButton>
+                  <Modal.Title>New Graph</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                      Dropdown Button
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={this.handleAddChartClick}>
+                        BarChart
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button
+                    variant="primary"
+                    onClick={event => {
+                      toggle();
+                      this.handleDhashboardSubmit();
+                    }}
+                  >
+                    Save Changes
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+            </Fragment>
+          )}
+        </Toggle>

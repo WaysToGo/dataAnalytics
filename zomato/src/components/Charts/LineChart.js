@@ -19,10 +19,21 @@ export default class Chart extends PureComponent {
 
   render() {
     const { list } = this.state;
+    let keys = Object.keys(list[0]);
+    let UI = keys.map(a => {
+      return (
+        <Line
+          type="monotone"
+          dataKey={a}
+          stroke="#8884d8"
+          activeDot={{ r: 8 }}
+        />
+      );
+    });
     return (
       <LineChart
-        width={500}
-        height={300}
+        width={1000}
+        height={400}
         data={list}
         margin={{
           top: 5,

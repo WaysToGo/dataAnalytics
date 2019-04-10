@@ -36,3 +36,7 @@
 .dashboard-items .fas {
   padding-right: 5px;
 }
+
+.selected {
+  color: var(--selected);
+}

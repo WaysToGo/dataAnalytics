@@ -19,11 +19,23 @@ export default class Chart extends Component {
 
   render() {
     const { list } = this.state;
+    let keys = Object.keys(list[0]);
+    let UI = keys.map(a => {
+      return (
+        <Bar
+          type="monotone"
+          dataKey={a}
+          stroke="#8884d8"
+          fill="#8884d8"
+          key={a}
+        />
+      );
+    });
     console.log(list);
     return (
       <BarChart
-        width={600}
-        height={300}
+        width={1000}
+        height={400}
         data={list}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
@@ -32,7 +44,7 @@ export default class Chart extends Component {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="order_price" fill="#8884d8" />
+        {UI}
       </BarChart>
     );
   }
