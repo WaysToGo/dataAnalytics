@@ -1,38 +1,31 @@
 import React, { Component } from "react";
+import Form from "react-bootstrap/Form";
 
 export default class NewDashboard extends Component {
   render() {
-    const { state, handleInputChange, handleDhashboardSubmit } = this.props;
+    const { state, handleInputChange } = this.props;
     return (
-      <div className="form-wrapper">
-        <div>
-          <label>
-            Name:
-            <input
-              type="text"
-              name="dashboardName"
-              value={state.dashboardName}
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-        <div>
-          <label>
-            Desctiption:
-            <input
-              type="text"
-              name="dashboardDescription"
-              value={state.dashboardDescription}
-              onChange={handleInputChange}
-            />
-          </label>
-        </div>
-        <div>
-          <button onClick={handleDhashboardSubmit} className="btn btn-default">
-            submit
-          </button>
-        </div>
-      </div>
+      <Form>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="dashboardName"
+            value={state.dashboardName}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+
+        <Form.Group controlId="formQueryDescription">
+          <Form.Label>description</Form.Label>
+          <Form.Control
+            type="text"
+            name="dashboardDescription"
+            value={state.dashboardDescription}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+      </Form>
     );
   }
 }

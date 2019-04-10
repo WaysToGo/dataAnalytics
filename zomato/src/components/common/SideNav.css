@@ -1,4 +1,4 @@
-.navbar {
+.nav-bar {
   height: 100vh;
   flex-basis: 200px;
   flex-grow: 0;
@@ -18,4 +18,21 @@
 
 .nav-body {
   flex-direction: column;
+}
+.dashboard-items {
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.nav-bar .fas {
+  padding-right: 5px;
+}
+
+.left-side-nav .nav-header {
+  cursor: pointer;
+}
+
+.dashboard-items .fas {
+  padding-right: 5px;
 }
