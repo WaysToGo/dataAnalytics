@@ -10,15 +10,15 @@ const mysql = require("mysql"),
   },
   cors = require("cors");
 
+/**
+ * Enable CROS for local usage
+ */
 app.use(cors());
 let connection;
 
-// Wrapper class for MySQL client
-// - Constructor creates MySQL connection
-// - Connection opened when query is done
-// - Promise is resolved when executing
-// - Promise returns reject in case of error
-// - If promise resolved rows will be the result
+/**
+ * Database to handle create connection and handle errors
+ */
 class Database {
   constructor(config) {
     this.connection = mysql.createConnection(config);
@@ -40,10 +40,10 @@ class Database {
     });
   }
 }
-
-// Function that will execute a query
-// - In case of an error: ensure connection is always closed
-// - In case of succes: return result and close connection afterwards
+/**
+ * Check if data base is connected
+ *
+ */
 Database.execute = function(config, callback) {
   const database = new Database(config);
   return callback(database).then(
@@ -55,9 +55,19 @@ Database.execute = function(config, callback) {
   );
 };
 
-// Instantiate Database
+/**
+ * Instantiate Database
+ *
+ */
 var database = new Database(config);
 
+/**
+ * Gets the details from database and sends to browser
+ * @param {object} req
+ * @param {object} res
+ * @param {string} query
+ *
+ */
 function getDetails(req, res, query) {
   let genericList;
   Database.execute(config, database =>
@@ -69,28 +79,25 @@ function getDetails(req, res, query) {
       res.send(JSON.stringify(genericList));
     })
     .catch(err => {
-      // handle the error
+      // if there is any error send response as 400
+      res.status(400);
       res.send(err);
     });
 }
 
-// Express routing
+/**
+ * Express Routing
+ *
+ */
 app.get("/", function(req, res) {
   res.send("test");
 });
-
-// connection.connect(function(err) {
-//   if (!err) {
-//     console.log("Database is connected");
-//   } else {
-//     console.log("Error connecting database ");
-//   }
-// });
 
 app.get("/cities", function(req, res) {
   const query = "select * from cities";
   getDetails(req, res, query);
 });
+
 app.get("/users", function(req, res) {
   const query = "select * from users";
   getDetails(req, res, query);
@@ -100,6 +107,7 @@ app.get("/restaurants", function(req, res) {
   const query = "select * from restaurants";
   getDetails(req, res, query);
 });
+
 app.get("/orders", function(req, res) {
   const query = "select * from restaurants";
   getDetails(req, res, query);
@@ -110,6 +118,7 @@ app.get("/query", function(req, res) {
   getDetails(req, res, query);
 });
 
+// out of scope for now
 app.get("/core", function(req, res) {
   let operation = null || req.query.operation,
     //any number
@@ -154,23 +163,6 @@ app.get("/core", function(req, res) {
       break;
     default:
       break;
-  }
-
-  if (operation == "compare") {
-    if (timeBy && timeBy) {
-      query = `(
-        SELECT
-          "count"(*) as thisweek
-        from
-          orders
-      ) - (
-        SELECT
-          "count"(*) as lastweek
-        from
-          orders
-          where order_date = date_sub(now(),interval -${time} ${timeBy})
-      ) as total_count`;
-    }
   }
 });
 
