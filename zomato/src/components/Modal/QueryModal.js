@@ -1,12 +1,18 @@
 import React, { Component, Fragment } from "react";
-import Toggle from "../Common/Toogle.jsx";
+import Toggle from "../Common/Toogle";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import QueryInput from "../Inputfield/QueryInput";
 export default class QueryModal extends Component {
   render() {
-    const { handleInputChange, state, handleNewQuerySubmit } = this.props;
+    const {
+      handleInputChange,
+      queryName,
+      queryDescription,
+      querySql,
+      handleQuerySave
+    } = this.props;
     return (
       <Toggle>
         {({ on, toggle }) => (
@@ -22,7 +28,9 @@ export default class QueryModal extends Component {
               <Modal.Body>
                 <QueryInput
                   handleInputChange={handleInputChange}
-                  state={state}
+                  queryName={queryName}
+                  queryDescription={queryDescription}
+                  querySql={querySql}
                 />
               </Modal.Body>
               <Modal.Footer>
@@ -30,7 +38,7 @@ export default class QueryModal extends Component {
                   variant="dark"
                   onClick={event => {
                     toggle();
-                    handleNewQuerySubmit();
+                    handleQuerySave();
                   }}
                 >
                   Save

@@ -3,7 +3,12 @@ import Form from "react-bootstrap/Form";
 
 export default class QueryInput extends Component {
   render() {
-    const { state, handleInputChange } = this.props;
+    const {
+      handleInputChange,
+      queryName,
+      queryDescription,
+      querySql
+    } = this.props;
     return (
       <Form>
         <Form.Group controlId="formBasicName">
@@ -11,7 +16,7 @@ export default class QueryInput extends Component {
           <Form.Control
             type="text"
             name="queryName"
-            value={state.queryName}
+            value={queryName}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -21,7 +26,7 @@ export default class QueryInput extends Component {
           <Form.Control
             type="text"
             name="queryDescription"
-            value={state.queryDescription}
+            value={queryDescription}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -30,7 +35,7 @@ export default class QueryInput extends Component {
           <Form.Control
             type="text"
             name="querySql"
-            value={state.querySql}
+            value={querySql}
             onChange={handleInputChange}
           />
         </Form.Group>

@@ -44,7 +44,7 @@ export default class Chart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="order_price" />
+        <XAxis />
         <YAxis />
         <Tooltip />
         <Legend />

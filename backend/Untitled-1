@@ -43,7 +43,7 @@ axios
                     variant="primary"
                     onClick={event => {
                       toggle();
-                      this.handleDhashboardSubmit();
+                      this.handleAddToDhashboard();
                     }}
                   >
                     Save Changes

@@ -22,31 +22,31 @@ export default class Chart extends PureComponent {
 
   render() {
     const { list } = this.state;
-    let keys = Object.keys(list[0]);
-    let i = 0;
-    let UI = keys.map(a => {
-      if (i === 0) {
-        i += 1;
-        return (
-          <Area
-            type="monotone"
-            dataKey={a}
-            fill="#8884d8"
-            stroke="#8884d8"
-            key={a}
-          />
-        );
-      }
-      if (i === 1) {
-        i += 1;
-        return <Bar dataKey={a} barSize={20} fill="#413ea0" key={a} />;
-      }
-      if (i === 2) {
-        i = 0;
-        return <Line type="monotone" dataKey={a} stroke="#ff7300" key={a} />;
-      }
-      return "";
-    });
+    let keys = Object.keys(list[0]),
+      i = 0,
+      CombinedChart = keys.map(a => {
+        if (i === 0) {
+          i += 1;
+          return (
+            <Area
+              type="monotone"
+              dataKey={a}
+              fill="#8884d8"
+              stroke="#8884d8"
+              key={a}
+            />
+          );
+        }
+        if (i === 1) {
+          i += 1;
+          return <Bar dataKey={a} barSize={20} fill="#413ea0" key={a} />;
+        }
+        if (i === 2) {
+          i = 0;
+          return <Line type="monotone" dataKey={a} stroke="#ff7300" key={a} />;
+        }
+        return "";
+      });
     return (
       <div style={{ width: "90%", height: 400 }} className="mb-4">
         <ResponsiveContainer>
@@ -62,11 +62,11 @@ export default class Chart extends PureComponent {
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />
-            <XAxis dataKey="name" />
+            <XAxis />
             <YAxis />
             <Tooltip />
             <Legend />
-            {UI}
+            {CombinedChart}
           </ComposedChart>
         </ResponsiveContainer>
       </div>

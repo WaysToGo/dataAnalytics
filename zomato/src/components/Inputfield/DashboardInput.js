@@ -3,7 +3,11 @@ import Form from "react-bootstrap/Form";
 
 export default class DashboardInput extends Component {
   render() {
-    const { state, handleInputChange } = this.props;
+    const {
+      handleInputChange,
+      dashboardName,
+      dashboardDescription
+    } = this.props;
     return (
       <Form>
         <Form.Group controlId="formBasicName">
@@ -11,7 +15,7 @@ export default class DashboardInput extends Component {
           <Form.Control
             type="text"
             name="dashboardName"
-            value={state.dashboardName}
+            value={dashboardName}
             onChange={handleInputChange}
           />
         </Form.Group>
@@ -21,7 +25,7 @@ export default class DashboardInput extends Component {
           <Form.Control
             type="text"
             name="dashboardDescription"
-            value={state.dashboardDescription}
+            value={dashboardDescription}
             onChange={handleInputChange}
           />
         </Form.Group>

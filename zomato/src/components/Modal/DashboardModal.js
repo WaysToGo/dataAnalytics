@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import Toggle from "../Common/Toogle.jsx";
+import Toggle from "../Common/Toogle";
 
 import Modal from "react-bootstrap/Modal";
 import DashboardInput from "../Inputfield/DashboardInput";
@@ -8,7 +8,12 @@ import "./DashboardModal.css";
 
 export default class DashboardModal extends Component {
   render() {
-    const { handleInputChange, state, handleDhashboardSubmit } = this.props;
+    const {
+      handleInputChange,
+      dashboardName,
+      dashboardDescription,
+      handleAddToDhashboard
+    } = this.props;
     return (
       <Toggle>
         {({ on, toggle }) => (
@@ -25,7 +30,8 @@ export default class DashboardModal extends Component {
               <Modal.Body>
                 <DashboardInput
                   handleInputChange={handleInputChange}
-                  state={state}
+                  dashboardName={dashboardName}
+                  dashboardDescription={dashboardDescription}
                 />
               </Modal.Body>
               <Modal.Footer>
@@ -33,7 +39,7 @@ export default class DashboardModal extends Component {
                   variant="dark"
                   onClick={event => {
                     toggle();
-                    handleDhashboardSubmit();
+                    handleAddToDhashboard();
                   }}
                 >
                   Save
