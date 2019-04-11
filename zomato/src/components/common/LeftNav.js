@@ -82,6 +82,7 @@ export default class LeftNav extends Component {
           </div>
         );
       });
+      dashboardItems.push();
     }
 
     return (

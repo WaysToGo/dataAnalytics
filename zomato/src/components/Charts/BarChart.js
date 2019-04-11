@@ -20,14 +20,14 @@ export default class Chart extends Component {
   render() {
     const { list } = this.state;
     let keys = Object.keys(list[0]);
-    let DynamicBars = keys.map(a => {
+    let DynamicBars = keys.map((data, i) => {
       return (
         <Bar
           type="monotone"
-          dataKey={a}
+          dataKey={data}
           stroke="#8884d8"
           fill="#8884d8"
-          key={a}
+          key={i}
         />
       );
     });

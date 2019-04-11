@@ -1,8 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import QueryModal from "../Modal/QueryModal";
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import QueryInput from "../Inputfield/QueryInput";
 
 export default class RightNav extends Component {
   constructor() {
@@ -11,7 +8,8 @@ export default class RightNav extends Component {
       on: false,
       queryName: "",
       queryDescription: "",
-      querySql: ""
+      querySql: "",
+      title: ""
     };
   }
 
@@ -73,7 +71,7 @@ export default class RightNav extends Component {
     e.stopPropagation();
     let dashboardList = this.props.dashboardList;
     let selectedDashboard = this.props.selectedDashboard;
-    let queryName = this.state.queryName;
+    let queryName = e.target.parentElement.parentElement.innerText.toLocaleLowerCase();
     let dashboardIndex = -1;
     let queryIndex = -1;
     try {
@@ -83,7 +81,7 @@ export default class RightNav extends Component {
             dashboardIndex = index;
             if (dashboard.queries) {
               dashboard.queries.forEach((query, i) => {
-                if (query.name === queryName) {
+                if (query.name.toLocaleLowerCase() === queryName) {
                   queryIndex = i;
                 }
               });
@@ -114,6 +112,11 @@ export default class RightNav extends Component {
     });
   };
 
+  changeTitle = title => {
+    this.setState({
+      title
+    });
+  };
   handleInputChange = event => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -125,7 +128,7 @@ export default class RightNav extends Component {
   };
   render() {
     const { queryData, updateSelectedQuery, currentQuery } = this.props;
-    const { queryName, queryDescription, querySql } = this.state;
+    const { queryName, queryDescription, querySql, on, title } = this.state;
     let queryList = [];
     if (queryData) {
       queryList = queryData.map((query, i) => {
@@ -143,6 +146,7 @@ export default class RightNav extends Component {
                 className="far fa-edit pull-right "
                 onClick={e => {
                   this.toggle();
+                  this.changeTitle("Update Query");
                   this.handleQueryEdit(e, query);
                 }}
               />
@@ -161,41 +165,32 @@ export default class RightNav extends Component {
     return (
       <nav className="nav-bar">
         <div className="nav-header">
-          <QueryModal
-            handleQuerySave={this.handleQuerySave}
-            queryName={queryName}
-            queryDescription={queryDescription}
-            querySql={querySql}
-            handleInputChange={this.handleInputChange}
-          />
-        </div>
-
-        <div className="nav-body">{queryList}</div>
-
-        <Modal show={this.state.on} onHide={this.toggle}>
-          <Modal.Header closeButton>
-            <Modal.Title>Update Query</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <QueryInput
-              handleInputChange={this.handleInputChange}
+          <Fragment>
+            <button
+              onClick={() => {
+                this.toggle();
+                this.changeTitle("New Query");
+                this.clearInutFields();
+              }}
+              className="btn dashboard-modal "
+            >
+              <i className="far fa-plus-square" />
+              Query
+            </button>
+            <QueryModal
+              handleQuerySave={this.handleQuerySave}
               queryName={queryName}
               queryDescription={queryDescription}
               querySql={querySql}
+              handleInputChange={this.handleInputChange}
+              on={on}
+              toggle={this.toggle}
+              title={title}
             />
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              onClick={event => {
-                this.toggle();
-                this.handleQuerySave();
-              }}
-            >
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
+          </Fragment>
+        </div>
+
+        <div className="nav-body">{queryList}</div>
       </nav>
     );
   }

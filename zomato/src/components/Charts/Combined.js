@@ -24,26 +24,28 @@ export default class Chart extends PureComponent {
     const { list } = this.state;
     let keys = Object.keys(list[0]),
       i = 0,
-      CombinedChart = keys.map(a => {
+      CombinedChart = keys.map((data, index) => {
         if (i === 0) {
           i += 1;
           return (
             <Area
               type="monotone"
-              dataKey={a}
+              dataKey={data}
               fill="#8884d8"
               stroke="#8884d8"
-              key={a}
+              key={index}
             />
           );
         }
         if (i === 1) {
           i += 1;
-          return <Bar dataKey={a} barSize={20} fill="#413ea0" key={a} />;
+          return <Bar dataKey={data} barSize={20} fill="#413ea0" key={index} />;
         }
         if (i === 2) {
           i = 0;
-          return <Line type="monotone" dataKey={a} stroke="#ff7300" key={a} />;
+          return (
+            <Line type="monotone" dataKey={data} stroke="#ff7300" key={index} />
+          );
         }
         return "";
       });

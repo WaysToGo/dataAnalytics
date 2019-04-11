@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from "react";
-import Toggle from "../Common/Toogle";
+import React, { Component } from "react";
 
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -11,43 +10,36 @@ export default class QueryModal extends Component {
       queryName,
       queryDescription,
       querySql,
-      handleQuerySave
+      handleQuerySave,
+      on,
+      toggle,
+      title
     } = this.props;
     return (
-      <Toggle>
-        {({ on, toggle }) => (
-          <Fragment>
-            <button onClick={toggle} className="btn dashboard-modal ">
-              <i className="far fa-plus-square" />
-              Query
-            </button>
-            <Modal show={on} onHide={toggle}>
-              <Modal.Header closeButton>
-                <Modal.Title>New Query</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <QueryInput
-                  handleInputChange={handleInputChange}
-                  queryName={queryName}
-                  queryDescription={queryDescription}
-                  querySql={querySql}
-                />
-              </Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="dark"
-                  onClick={event => {
-                    toggle();
-                    handleQuerySave();
-                  }}
-                >
-                  Save
-                </Button>
-              </Modal.Footer>
-            </Modal>
-          </Fragment>
-        )}
-      </Toggle>
+      <Modal show={on} onHide={toggle}>
+        <Modal.Header closeButton>
+          <Modal.Title>{title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <QueryInput
+            handleInputChange={handleInputChange}
+            queryName={queryName}
+            queryDescription={queryDescription}
+            querySql={querySql}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="dark"
+            onClick={event => {
+              toggle();
+              handleQuerySave();
+            }}
+          >
+            Save
+          </Button>
+        </Modal.Footer>
+      </Modal>
     );
   }
 }

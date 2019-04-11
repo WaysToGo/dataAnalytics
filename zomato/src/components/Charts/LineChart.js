@@ -20,14 +20,14 @@ export default class Chart extends PureComponent {
   render() {
     const { list } = this.state;
     let keys = Object.keys(list[0]);
-    let DynamicLines = keys.map(a => {
+    let DynamicLines = keys.map((data, i) => {
       return (
         <Line
           type="monotone"
-          dataKey={a}
+          dataKey={data}
           stroke="#8884d8"
           activeDot={{ r: 8 }}
-          key={a}
+          key={i}
         />
       );
     });
