@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Form from "react-bootstrap/Form";
 
-export default class NewDashboard extends Component {
+export default class QueryInput extends Component {
   render() {
     const { state, handleInputChange } = this.props;
     return (
@@ -10,18 +10,27 @@ export default class NewDashboard extends Component {
           <Form.Label>Name</Form.Label>
           <Form.Control
             type="text"
-            name="dashboardName"
-            value={state.dashboardName}
+            name="queryName"
+            value={state.queryName}
             onChange={handleInputChange}
           />
         </Form.Group>
 
         <Form.Group controlId="formQueryDescription">
-          <Form.Label>Description</Form.Label>
+          <Form.Label>description</Form.Label>
           <Form.Control
             type="text"
-            name="dashboardDescription"
-            value={state.dashboardDescription}
+            name="queryDescription"
+            value={state.queryDescription}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formQuery">
+          <Form.Label>Query</Form.Label>
+          <Form.Control
+            type="text"
+            name="querySql"
+            value={state.querySql}
             onChange={handleInputChange}
           />
         </Form.Group>

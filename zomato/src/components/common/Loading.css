@@ -2,7 +2,7 @@
   width: 28px;
   height: 28px;
   display: inline-block;
-  border: 2px solid #0f273d;
+  border: 2px solid var(--white);
   border-right-color: transparent;
   border-radius: 50%;
   animation: rotate 1s infinite linear;

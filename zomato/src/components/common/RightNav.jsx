@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import QueryModal from "../Modal/QueryModal";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import NewQuery from "../Inputfield/NewQuery";
+import QueryInput from "../Inputfield/QueryInput";
 
 export default class RightNav extends Component {
   static defaultProps = {
@@ -79,7 +79,7 @@ export default class RightNav extends Component {
             <Modal.Title>Update Query</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <NewQuery handleInputChange={handleInputChange} state={state} />
+            <QueryInput handleInputChange={handleInputChange} state={state} />
           </Modal.Body>
           <Modal.Footer>
             <Button

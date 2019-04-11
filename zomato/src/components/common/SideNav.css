@@ -24,27 +24,8 @@
   margin-top: 10px;
 }
 
-.nav-bar .fas {
-  padding-right: 5px;
-}
-
 .left-side-nav .nav-header {
   cursor: pointer;
-}
-
-.dashboard-items .fas {
-  padding-right: 5px;
-}
-
-.selected {
-  color: var(--selected);
-}
-.far {
-  line-height: 1.5;
-}
-
-.fa-trash-alt {
-  color: var(--fail);
 }
 
 .dashboard-items {

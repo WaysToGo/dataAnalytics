@@ -19,7 +19,7 @@ export default class Chart extends PureComponent {
   render() {
     const { list } = this.state;
     let keys = Object.keys(list[0]);
-    let UI = keys.map(a => {
+    let DynamicAreas = keys.map(a => {
       return (
         <Area
           type="monotone"
@@ -46,7 +46,7 @@ export default class Chart extends PureComponent {
         <XAxis />
         <YAxis />
         <Tooltip />
-        {UI}
+        {DynamicAreas}
       </AreaChart>
     );
   }

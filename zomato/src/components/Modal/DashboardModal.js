@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import Toggle from "../Common/Toogle.jsx";
 
 import Modal from "react-bootstrap/Modal";
-import NewDashboard from "../Inputfield/NewDashboard";
+import DashboardInput from "../Inputfield/DashboardInput";
 import Button from "react-bootstrap/Button";
 import "./DashboardModal.css";
 
@@ -20,23 +20,23 @@ export default class DashboardModal extends Component {
 
             <Modal show={on} onHide={toggle}>
               <Modal.Header closeButton>
-                <Modal.Title>Create New Dashboard</Modal.Title>
+                <Modal.Title> New Dashboard</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <NewDashboard
+                <DashboardInput
                   handleInputChange={handleInputChange}
                   state={state}
                 />
               </Modal.Body>
               <Modal.Footer>
                 <Button
-                  variant="primary"
+                  variant="dark"
                   onClick={event => {
                     toggle();
                     handleDhashboardSubmit();
                   }}
                 >
-                  Save Changes
+                  Save
                 </Button>
               </Modal.Footer>
             </Modal>

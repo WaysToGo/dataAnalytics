@@ -45,6 +45,7 @@ export default class Chart extends PureComponent {
         i = 0;
         return <Line type="monotone" dataKey={a} stroke="#ff7300" key={a} />;
       }
+      return "";
     });
     return (
       <div style={{ width: "90%", height: 400 }} className="mb-4">

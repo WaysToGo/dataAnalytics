@@ -20,7 +20,7 @@ export default class Chart extends Component {
   render() {
     const { list } = this.state;
     let keys = Object.keys(list[0]);
-    let UI = keys.map(a => {
+    let DynamicBars = keys.map(a => {
       return (
         <Bar
           type="monotone"
@@ -43,7 +43,7 @@ export default class Chart extends Component {
         <YAxis />
         <Tooltip />
         <Legend />
-        {UI}
+        {DynamicBars}
       </BarChart>
     );
   }
