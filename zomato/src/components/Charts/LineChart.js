@@ -27,12 +27,13 @@ export default class Chart extends PureComponent {
           dataKey={a}
           stroke="#8884d8"
           activeDot={{ r: 8 }}
+          key={a}
         />
       );
     });
     return (
       <LineChart
-        width={1000}
+        width={900}
         height={400}
         data={list}
         margin={{
@@ -47,13 +48,7 @@ export default class Chart extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type="monotone"
-          dataKey="order_price"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-        />
-        {/* <Line type="monotone" dataKey="order_date" stroke="#82ca9d" /> */}
+        {UI}
       </LineChart>
     );
   }

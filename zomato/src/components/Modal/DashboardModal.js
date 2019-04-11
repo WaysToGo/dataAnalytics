@@ -14,7 +14,7 @@ export default class DashboardModal extends Component {
         {({ on, toggle }) => (
           <Fragment>
             <button onClick={toggle} className="btn dashboard-modal ">
-              <i className="fas fa-plus" />
+              <i className="far fa-plus-square" />
               Dashboard
             </button>
 

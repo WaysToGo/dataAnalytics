@@ -32,7 +32,7 @@ export default class Chart extends PureComponent {
     });
     return (
       <AreaChart
-        width={1000}
+        width={900}
         height={400}
         data={list}
         margin={{

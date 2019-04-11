@@ -72,12 +72,13 @@ export default class HomePage extends Component {
       });
       localStorage.setItem("dashboards", JSON.stringify(dashboards));
     }
+    this.clearFields();
   };
   updateDashboard = currentDashboard => {
-    this.state.dashboards.map(a => {
-      if (a.name === currentDashboard) {
+    this.state.dashboards.forEach(dashboard => {
+      if (dashboard.name === currentDashboard) {
         this.setState({
-          queryData: a.queries,
+          queryData: dashboard.queries,
           currentDashboard,
           showCharts: false
         });
@@ -119,11 +120,23 @@ export default class HomePage extends Component {
 
     try {
       if (dashboards && dashboards.length > 0) {
-        dashboards.map(a => {
+        let sendCopy = false;
+        dashboards.forEach(a => {
           if (a.name === currentDashboard) {
             if (a.queries) {
               let copy = a.queries.slice();
-              a.queries = [query, ...copy];
+              copy.forEach(b => {
+                if (b.name === query.name) {
+                  b.description = query.description;
+                  b.query = query.query;
+                  sendCopy = true;
+                }
+              });
+              if (sendCopy) {
+                a.queries = [...copy];
+              } else {
+                a.queries = [query, ...copy];
+              }
             } else {
               a.queries = [];
               a.queries = [query];
@@ -135,7 +148,62 @@ export default class HomePage extends Component {
         });
         localStorage.setItem("dashboards", JSON.stringify(dashboards));
       }
+    } catch (error) {
+      console.error("issue while adding values ");
+    }
+    this.clearFields();
+  };
+
+  handleEdit = (e, query) => {
+    e.stopPropagation();
+    this.setState({
+      queryName: query.name,
+      queryDescription: query.description,
+      querySql: query.query
+    });
+  };
+
+  handleQueryDelete = (e, query) => {
+    e.stopPropagation();
+    let dashboards = this.state.dashboards;
+    let currentDashboard = this.state.currentDashboard;
+    let queryName = this.state.queryName;
+    let dashboardIndex = -1;
+    let queryIndex = -1;
+    try {
+      if (dashboards && dashboards.length > 0) {
+        dashboards.forEach((dashboard, index) => {
+          if (dashboard.name === currentDashboard) {
+            dashboardIndex = index;
+            if (dashboard.queries) {
+              dashboard.queries.forEach((query, i) => {
+                if (query.name === queryName) {
+                  queryIndex = i;
+                }
+              });
+            }
+          }
+        });
+        if (~dashboardIndex && ~queryIndex) {
+          dashboards[dashboardIndex].queries.splice(queryIndex, 1);
+          this.setState({
+            dashboards
+          });
+        }
+
+        localStorage.setItem("dashboards", JSON.stringify(dashboards));
+      }
     } catch (error) {}
+  };
+
+  clearFields = () => {
+    this.setState({
+      dashboardName: "",
+      dashboardDescription: "",
+      queryName: "",
+      queryDescription: "",
+      querySql: ""
+    });
   };
 
   render() {
@@ -184,6 +252,8 @@ export default class HomePage extends Component {
             state={this.state}
             handleInputChange={this.handleInputChange}
             currentDashboard={this.currentDashboard}
+            handleEdit={this.handleEdit}
+            handleQueryDelete={this.handleQueryDelete}
           />
         )}
       </div>

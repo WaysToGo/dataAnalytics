@@ -1,8 +1,24 @@
 import "./SideNav.css";
 import React, { Component } from "react";
 import QueryModal from "../Modal/QueryModal";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import NewQuery from "../Inputfield/NewQuery";
 
 export default class RightNav extends Component {
+  static defaultProps = {
+    initial: false
+  };
+
+  state = {
+    on: this.props.initial
+  };
+
+  toggle = () => {
+    this.setState({
+      on: !this.state.on
+    });
+  };
   render() {
     const {
       queryData,
@@ -10,32 +26,39 @@ export default class RightNav extends Component {
       state,
       handleInputChange,
       handleNewQuerySubmit,
-      currentQuery
+      handleEdit,
+      currentQuery,
+      handleQueryDelete
     } = this.props;
     let dashboardItems = [];
     if (queryData) {
-      dashboardItems = queryData.map(a => {
-        if (a.name == currentQuery) {
-          return (
-            <div
-              onClick={() => updateQuery(a.name, a.query)}
-              key={a.name}
-              className="dashboard-items selected"
-            >
-              {a.name}
-            </div>
-          );
-        } else {
-          return (
-            <div
-              onClick={() => updateQuery(a.name, a.query)}
-              key={a.name}
-              className="dashboard-items "
-            >
-              {a.name}
-            </div>
-          );
-        }
+      dashboardItems = queryData.map(query => {
+        return (
+          <div
+            onClick={() => updateQuery(query.name, query.query)}
+            key={query.name}
+            className={`dashboard-items w-75 d-flex justify-content-between ${
+              query.name === currentQuery ? "selected" : ""
+            }`}
+          >
+            {query.name}
+            <span>
+              <i
+                className="far fa-edit pull-right "
+                onClick={e => {
+                  this.toggle();
+                  handleEdit(e, query);
+                }}
+              />
+              <i
+                className="far fa-trash-alt pl-2"
+                onClick={e => {
+                  handleQueryDelete(e, query);
+                }}
+              />
+            </span>
+          </div>
+        );
       });
     }
 
@@ -50,6 +73,26 @@ export default class RightNav extends Component {
         </div>
 
         <div className="nav-body">{dashboardItems}</div>
+
+        <Modal show={this.state.on} onHide={this.toggle}>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Query</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <NewQuery handleInputChange={handleInputChange} state={state} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={event => {
+                this.toggle();
+                handleNewQuerySubmit();
+              }}
+            >
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </nav>
     );
   }

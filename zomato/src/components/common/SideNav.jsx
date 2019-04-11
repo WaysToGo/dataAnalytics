@@ -15,28 +15,18 @@ export default class SideNav extends Component {
     let dashboardItems = [];
 
     if (dashboards) {
-      dashboardItems = dashboards.map(a => {
-        if (a.name == currentDashboard) {
-          return (
-            <div
-              onClick={() => updateDashboard(a.name)}
-              key={a.description}
-              className="dashboard-items selected"
-            >
-              {a.name}
-            </div>
-          );
-        } else {
-          return (
-            <div
-              onClick={() => updateDashboard(a.name)}
-              key={a.description}
-              className="dashboard-items "
-            >
-              {a.name}
-            </div>
-          );
-        }
+      dashboardItems = dashboards.map(dashboard => {
+        return (
+          <div
+            onClick={() => updateDashboard(dashboard.name)}
+            key={dashboard.description}
+            className={`dashboard-items ${
+              dashboard.name === currentDashboard ? "selected" : ""
+            }`}
+          >
+            {dashboard.name}
+          </div>
+        );
       });
     }
 

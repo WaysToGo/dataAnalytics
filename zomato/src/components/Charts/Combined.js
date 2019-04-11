@@ -47,7 +47,7 @@ export default class Chart extends PureComponent {
       }
     });
     return (
-      <div style={{ width: "95%", height: 400 }}>
+      <div style={{ width: "90%", height: 400 }} className="mb-4">
         <ResponsiveContainer>
           <ComposedChart
             width={600}

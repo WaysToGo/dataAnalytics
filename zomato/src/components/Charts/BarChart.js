@@ -31,10 +31,9 @@ export default class Chart extends Component {
         />
       );
     });
-    console.log(list);
     return (
       <BarChart
-        width={1000}
+        width={900}
         height={400}
         data={list}
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}

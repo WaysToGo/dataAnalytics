@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from "react";
-import Form from "react-bootstrap/Form";
 import BarChart from "./BarChart";
 import AreaChart from "./AreaChart";
 import LineChart from "./LineChart";
-import ChartModal from "../Modal/ChartModal";
 import Combined from "./Combined";
 
 export default class Charts extends Component {
@@ -14,7 +12,6 @@ export default class Charts extends Component {
       selectedChart: "",
       DynamicDropdown: "",
       values: [],
-      xLabel: "",
       charts: {}
     };
   }
@@ -72,13 +69,21 @@ export default class Charts extends Component {
 
   render() {
     const { dashboardData } = this.state;
+
     return (
       <Fragment>
-        <ChartModal {...this} />
-        <AreaChart dashboardData={dashboardData} />
-        <BarChart dashboardData={dashboardData} />
-        <LineChart dashboardData={dashboardData} />
-        <Combined dashboardData={dashboardData} />
+        {/* <ChartModal {...this} /> */}
+
+        <div className="mb-5" />
+
+        {dashboardData && (
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <AreaChart dashboardData={dashboardData} />
+            <BarChart dashboardData={dashboardData} />
+            <LineChart dashboardData={dashboardData} />
+            <Combined dashboardData={dashboardData} />
+          </div>
+        )}
       </Fragment>
     );
   }
