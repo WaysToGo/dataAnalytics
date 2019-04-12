@@ -18,18 +18,22 @@ export default class Chart extends PureComponent {
 
   render() {
     const { list } = this.state;
-    let keys = Object.keys(list[0]);
-    let DynamicAreas = keys.map((data, i) => {
-      return (
-        <Area
-          type="monotone"
-          dataKey={data}
-          stroke="#8884d8"
-          fill="#8884d8"
-          key={i}
-        />
-      );
-    });
+    const { xaxis, yaxis, chartData } = this.props;
+    let Dynamic = [];
+    if (chartData) {
+      Dynamic = chartData.map((data, i) => {
+        return (
+          <Area
+            type="monotone"
+            dataKey={data.field}
+            stroke={data.color}
+            fill={data.color}
+            key={i}
+          />
+        );
+      });
+    }
+
     return (
       <AreaChart
         width={900}
@@ -43,10 +47,10 @@ export default class Chart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis />
-        <YAxis />
+        <XAxis dataKey={xaxis} />
+        <YAxis dataKey={yaxis} />
         <Tooltip />
-        {DynamicAreas}
+        {Dynamic}
       </AreaChart>
     );
   }

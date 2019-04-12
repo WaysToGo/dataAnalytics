@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Loading from "../Common/Loading";
 import LeftNav from "../Common/LeftNav";
 import RightNav from "../Common/RightNav";
-
+import QueryForm from "./CustomCharts";
 import "./HomePage.css";
 
 import axios from "axios";
@@ -19,7 +19,13 @@ export default class HomePage extends Component {
       selectedDashboard: "",
       currentQuery: [],
       queryData: [],
-      showCharts: false
+      showCharts: false,
+      showQueryModal: false,
+      //custom query data
+      chartData: [{ field: "", color: "" }],
+      chart: "BarChart",
+      xaxis: "",
+      yaxis: ""
     };
   }
 
@@ -72,12 +78,25 @@ export default class HomePage extends Component {
         this.setState({
           dashboardData: data,
           loading: false,
-          showCharts: true
+          showCharts: true,
+          showQueryModal: true
         });
       })
       .catch(error =>
         this.setState({ loading: false, error: "Sorry somthing went wrong" })
       );
+  };
+
+  updateCustomChartsState = (chartData, chart, xaxis, yaxis) => {
+    this.setState(
+      {
+        chartData,
+        chart,
+        xaxis,
+        yaxis
+      },
+      () => console.log("yoda", this.state)
+    );
   };
 
   render() {
@@ -89,8 +108,13 @@ export default class HomePage extends Component {
       queryData,
       currentQuery,
       showCharts,
-      dashboardData
+      dashboardData,
+      chartData,
+      chart,
+      xaxis,
+      yaxis
     } = this.state;
+
     if (loading) {
       return (
         <div className="loading-container">
@@ -114,7 +138,21 @@ export default class HomePage extends Component {
         />
         <main className="content-wrapper">
           <section>
-            {showCharts && <Charts dashboardData={dashboardData} />}
+            {showCharts && (
+              <QueryForm
+                dashboardData={dashboardData}
+                updateCustomChartsState={this.updateCustomChartsState}
+              />
+            )}
+            {showCharts && (
+              <Charts
+                dashboardData={dashboardData}
+                chartData={chartData}
+                chart={chart}
+                xaxis={xaxis}
+                yaxis={yaxis}
+              />
+            )}
           </section>
         </main>
         {selectedDashboard.length > 0 && (

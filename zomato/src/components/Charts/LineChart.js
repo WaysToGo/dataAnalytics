@@ -19,18 +19,21 @@ export default class Chart extends PureComponent {
 
   render() {
     const { list } = this.state;
-    let keys = Object.keys(list[0]);
-    let DynamicLines = keys.map((data, i) => {
-      return (
-        <Line
-          type="monotone"
-          dataKey={data}
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
-          key={i}
-        />
-      );
-    });
+    const { xaxis, yaxis, chartData } = this.props;
+    let DynamicLines = [];
+    if (chartData) {
+      DynamicLines = chartData.map((data, i) => {
+        return (
+          <Line
+            type="monotone"
+            dataKey={data.field}
+            stroke={data.color}
+            fill={data.color}
+            key={i}
+          />
+        );
+      });
+    }
     return (
       <LineChart
         width={900}
@@ -44,8 +47,8 @@ export default class Chart extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis />
-        <YAxis />
+        <XAxis dataKey={xaxis} />
+        <YAxis dataKey={yaxis} />
         <Tooltip />
         <Legend />
         {DynamicLines}

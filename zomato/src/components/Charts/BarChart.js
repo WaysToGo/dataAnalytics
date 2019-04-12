@@ -19,18 +19,21 @@ export default class Chart extends Component {
 
   render() {
     const { list } = this.state;
-    let keys = Object.keys(list[0]);
-    let DynamicBars = keys.map((data, i) => {
-      return (
-        <Bar
-          type="monotone"
-          dataKey={data}
-          stroke="#8884d8"
-          fill="#8884d8"
-          key={i}
-        />
-      );
-    });
+    const { xaxis, yaxis, chartData } = this.props;
+    let DynamicBars = [];
+    if (chartData) {
+      DynamicBars = chartData.map((data, i) => {
+        return (
+          <Bar
+            type="monotone"
+            dataKey={data.field}
+            stroke={data.color}
+            fill={data.color}
+            key={i}
+          />
+        );
+      });
+    }
     return (
       <BarChart
         width={900}
@@ -39,8 +42,8 @@ export default class Chart extends Component {
         margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis />
-        <YAxis />
+        <XAxis dataKey={xaxis} />
+        <YAxis dataKey={yaxis} />
         <Tooltip />
         <Legend />
         {DynamicBars}
