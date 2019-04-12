@@ -33,7 +33,8 @@ export default class QueryInput extends Component {
         <Form.Group controlId="formQuery">
           <Form.Label>Query</Form.Label>
           <Form.Control
-            type="text"
+            as="textarea"
+            rows="3"
             name="querySql"
             value={querySql}
             onChange={handleInputChange}

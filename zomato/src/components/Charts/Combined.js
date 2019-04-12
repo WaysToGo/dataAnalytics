@@ -13,15 +13,8 @@ import {
 } from "recharts";
 
 export default class Chart extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      list: [...this.props.dashboardData]
-    };
-  }
-
   render() {
-    const { list } = this.state;
+    const list = this.props.dashboardData;
     const { xaxis, yaxis, chartData } = this.props;
     let DynamicBars = [];
     if (chartData) {

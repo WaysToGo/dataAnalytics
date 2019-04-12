@@ -28,7 +28,6 @@ export default class ChartModal extends Component {
             addChart={addChart}
             removeChart={removeChart}
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
             chartData={chartData}
             xaxis={xaxis}
             yaxis={yaxis}

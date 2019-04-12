@@ -128,3 +128,35 @@ insert into orders (
     10
 
 );
+
+
+select * from orders where order_date between "2018-01-01" and "2019-02-01";
+
+
+select "2019-01-01" as mon1, "2019-01-01" + interval 1 month as mon2;
++
+
+)
+
+ where order_date between "2018-01-01" and "2019-02-01"
+
+select * from orders group by extract(month from order_date);
+
+
+
+
+SELECT
+    CONCAT('week ',WEEK(order_date)) weeks,
+    sum(order_price) as random
+    FROM orders
+    WHERE order_date BETWEEN '2018-01-21' AND ' 2019-03-05'
+    GROUP BY WEEK(order_date)
+    ORDER BY order_date;
+
+
+    SELECT
+*,
+FROM orders
+WHERE order_date > DATE_SUB(NOW(), INTERVAL 5 WEEK)
+GROUP BY WEEK(order_date)
+ORDER BY order_date;
