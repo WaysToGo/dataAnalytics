@@ -23,7 +23,6 @@ export default class HomePage extends Component {
       showQueryModal: false,
       //custom query data
       chartData: [{ field: "", color: "" }],
-      chart: "BarChart",
       xaxis: "",
       yaxis: ""
     };
@@ -110,7 +109,6 @@ export default class HomePage extends Component {
       showCharts,
       dashboardData,
       chartData,
-      chart,
       xaxis,
       yaxis
     } = this.state;
@@ -148,7 +146,6 @@ export default class HomePage extends Component {
               <Charts
                 dashboardData={dashboardData}
                 chartData={chartData}
-                chart={chart}
                 xaxis={xaxis}
                 yaxis={yaxis}
               />
