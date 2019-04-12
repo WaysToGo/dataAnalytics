@@ -151,7 +151,7 @@ export default class RightNav extends Component {
                 }}
               />
               <i
-                className="far fa-trash-alt pl-2"
+                className="far fa-trash-alt pl-2 delete-Icon"
                 onClick={e => {
                   this.handleQueryDelete(e, query);
                 }}

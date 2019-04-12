@@ -62,6 +62,7 @@ export default class Chart extends PureComponent {
           default:
             break;
         }
+        return "";
       });
     }
 

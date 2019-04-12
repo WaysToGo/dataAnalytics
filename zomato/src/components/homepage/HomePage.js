@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Loading from "../Common/Loading";
 import LeftNav from "../Common/LeftNav";
 import RightNav from "../Common/RightNav";
-import QueryForm from "./CustomCharts";
 import "./HomePage.css";
 
 import axios from "axios";
@@ -20,11 +19,7 @@ export default class HomePage extends Component {
       currentQuery: [],
       queryData: [],
       showCharts: false,
-      showQueryModal: false,
-      //custom query data
-      chartData: [{ field: "", color: "" }],
-      xaxis: "",
-      yaxis: ""
+      showQueryModal: false
     };
   }
 
@@ -86,18 +81,6 @@ export default class HomePage extends Component {
       );
   };
 
-  updateCustomChartsState = (chartData, chart, xaxis, yaxis) => {
-    this.setState(
-      {
-        chartData,
-        chart,
-        xaxis,
-        yaxis
-      },
-      () => console.log("yoda", this.state)
-    );
-  };
-
   render() {
     const {
       loading,
@@ -136,12 +119,6 @@ export default class HomePage extends Component {
         />
         <main className="content-wrapper">
           <section>
-            {showCharts && (
-              <QueryForm
-                dashboardData={dashboardData}
-                updateCustomChartsState={this.updateCustomChartsState}
-              />
-            )}
             {showCharts && (
               <Charts
                 dashboardData={dashboardData}
